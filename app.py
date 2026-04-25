@@ -5,9 +5,9 @@ import os
 
 app = Flask(__name__)
 
-# DATABASE CONFIG
+# ---------------- DATABASE CONFIG ----------------
 db_config = {
-    'host': 'localhost',
+    'host': 'localhost',   # CHANGE THIS LATER FOR CLOUD DB
     'user': 'root',
     'password': 'harsh7264867686',
     'database': 'SecureX'
@@ -20,6 +20,7 @@ MAX_ATTEMPTS = 3
 def index():
     return render_template('index.html')
 
+
 # ---------------- REGISTER ----------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -29,6 +30,7 @@ def register():
         password = request.form['password']
 
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        hashed_password = hashed_password.decode('utf-8')  # FIX
 
         db = mysql.connector.connect(**db_config)
         cursor = db.cursor()
@@ -41,9 +43,10 @@ def register():
         db.commit()
         db.close()
 
-        return "<h2>Registration Successful!</h2><a href='/login'>Go to Login</a>"
+        return render_template("success.html")  # better UI
 
     return render_template('register.html')
+
 
 # ---------------- LOGIN ----------------
 @app.route('/login', methods=['GET', 'POST'])
@@ -65,14 +68,17 @@ def login():
         cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
         result = cursor.fetchone()
 
-        if result and bcrypt.checkpw(password.encode('utf-8'), result[0]):
-            cursor.execute(
-                "INSERT INTO login_attempts (username, ip_address, status) VALUES (%s, %s, %s)",
-                (username, ip, "SUCCESS")
-            )
-            db.commit()
-            db.close()
-            return redirect(url_for('home'))
+        if result:
+            stored_password = result[0].encode('utf-8')
+
+            if bcrypt.checkpw(password.encode('utf-8'), stored_password):
+                cursor.execute(
+                    "INSERT INTO login_attempts (username, ip_address, status) VALUES (%s, %s, %s)",
+                    (username, ip, "SUCCESS")
+                )
+                db.commit()
+                db.close()
+                return redirect(url_for('home'))
 
         # Failed login
         cursor.execute(
@@ -99,10 +105,12 @@ def login():
 
     return render_template('login.html')
 
-# ---------------- HOME ----------------
+
+# ---------------- HOME PAGE ----------------
 @app.route('/home')
 def home():
     return render_template('home.html')
+
 
 # ---------------- DASHBOARD ----------------
 @app.route('/dashboard')
@@ -117,12 +125,14 @@ def dashboard():
 
     return render_template('dashboard.html', logs=logs)
 
+
 # ---------------- NMAP SCAN ----------------
 @app.route('/scan')
 def scan():
     result = os.popen("nmap 127.0.0.1").read()
     return f"<pre>{result}</pre>"
 
+
 # ---------------- RUN ----------------
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
