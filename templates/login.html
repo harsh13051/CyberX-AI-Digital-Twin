@@ -1,91 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #42a5f5, #0073e6);
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-        }
-        .container h1 {
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #005bb5;
-        }
-        .container label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .container input {
-            width: 95%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .container button {
-            width: 102%;
-            padding: 12px;
-            background: #0073e6;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .container button:hover {
-            background: #E63B60;
-        }
-        .container .footer {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        .container .footer a {
-            color: #0073e6;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .container .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<title>Login - SecureX</title>
+
+<style>
+body {
+    margin:0;
+    background:#020412;
+    font-family:Segoe UI;
+    overflow:hidden;
+}
+
+.grid {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image:
+        linear-gradient(rgba(0,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.1) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:move 10s linear infinite;
+}
+
+@keyframes move {
+    from {background-position:0 0;}
+    to {background-position:40px 40px;}
+}
+
+.scan {
+    position:absolute;
+    width:100%;
+    height:2px;
+    background:cyan;
+    box-shadow:0 0 15px cyan;
+    animation:scan 3s linear infinite;
+}
+
+@keyframes scan {
+    from {top:0;}
+    to {top:100%;}
+}
+
+.card {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(0,0,0,0.7);
+    padding:40px;
+    border-radius:15px;
+    width:350px;
+    box-shadow:0 0 20px cyan;
+    color:cyan;
+}
+
+input {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:5px;
+    background:#111;
+    color:white;
+}
+
+button {
+    width:100%;
+    padding:12px;
+    background:transparent;
+    border:2px solid cyan;
+    color:cyan;
+    cursor:pointer;
+}
+
+button:hover {
+    background:cyan;
+    color:black;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Login to Your Account</h1>
-        <form action="/login" method="POST">
-            <label for="email">Email:</label>
-            <input  id="email" name="email" placeholder="Enter your email" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+<div class="grid"></div>
+<div class="scan"></div>
 
-            <button type="submit">Login</button>
-        </form>
-        <div class="footer">
-            <p>Don't have an account? <a href="/register">Register here</a></p>
-        </div>
-    </div>
+<div class="card">
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+        <input name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button>Login</button>
+    </form>
+</div>
+
 </body>
 </html>

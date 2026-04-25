@@ -1,46 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #0073e6;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .content {
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            text-align: center;
-        }
-        .content p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #333;
-        }
-    </style>
+<title>Home</title>
+
+<style>
+body {
+    margin:0;
+    font-family:Segoe UI;
+    background: linear-gradient(120deg,#000428,#004e92);
+    color:white;
+    text-align:center;
+}
+
+h1 {
+    margin-top:100px;
+    font-size:50px;
+}
+
+.btn {
+    padding:15px 30px;
+    margin:20px;
+    border:none;
+    border-radius:30px;
+    background:#00c6ff;
+    color:white;
+    cursor:pointer;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to SecureX</h1>
-    </header>
-    <div class="content">
-        <h2>About BSI Learning and SRM AP University</h2>
-        <p><strong>BSI Learning Australia:</strong> BSI Learning offers innovative training solutions across Australia. Their mission is to empower individuals with practical skills and knowledge that align with the demands of the global workforce.</p>
-        <p><strong>SRM AP University:</strong> SRM University in Andhra Pradesh is a leading institution known for fostering innovation, research, and holistic education to create globally competitive professionals.</p>
-    </div>
+
+<h1>SecureX Dashboard</h1>
+
+<a href="/dashboard"><button class="btn">View Dashboard</button></a>
+<a href="/scan"><button class="btn">Run Scan</button></a>
+
 </body>
 </html>

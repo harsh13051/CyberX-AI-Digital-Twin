@@ -1,50 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Welcome to Our Organization</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        header {
-            background-color: #0073e6;
-            color: white;
-            padding: 20px 0;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin: 10px;
-            border: 1px solid white;
-            border-radius: 5px;
-            background-color: #005bb5;
-        }
-        nav a:hover {
-            background-color: #003f87;
-        }
-        section {
-            margin: 50px auto;
-            padding: 20px;
-            max-width: 600px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>SecureX</title>
+
+<style>
+body {
+    margin:0;
+    overflow:hidden;
+    background:#020412;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* GRID BACKGROUND */
+.grid {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image:
+        linear-gradient(rgba(0,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveGrid 10s linear infinite;
+}
+
+@keyframes moveGrid {
+    from { background-position: 0 0; }
+    to { background-position: 40px 40px; }
+}
+
+/* SCAN LINE */
+.scan {
+    position:absolute;
+    width:100%;
+    height:2px;
+    background: cyan;
+    box-shadow:0 0 20px cyan;
+    animation: scanMove 3s linear infinite;
+}
+
+@keyframes scanMove {
+    from { top:0; }
+    to { top:100%; }
+}
+
+/* CENTER UI */
+.container {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:#00ffff;
+}
+
+/* TITLE */
+h1 {
+    font-size:70px;
+    text-shadow:0 0 20px #00ffff;
+}
+
+/* SUBTEXT */
+p {
+    opacity:0.7;
+    margin-bottom:40px;
+}
+
+/* BUTTON */
+.btn {
+    padding:15px 40px;
+    margin:15px;
+    border:2px solid #00ffff;
+    background:transparent;
+    color:#00ffff;
+    border-radius:50px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover {
+    background:#00ffff;
+    color:black;
+    box-shadow:0 0 20px #00ffff;
+}
+
+/* RADAR PULSE */
+.radar {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:200px;
+    height:200px;
+    border:2px solid cyan;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform:translate(-50%,-50%) scale(0.5); opacity:1; }
+    100% { transform:translate(-50%,-50%) scale(2); opacity:0; }
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to Our Organization</h1>
-        <p>Your gateway to secure and efficient systems.</p>
-        <nav>
-            <a  method="GET" action="/login">Login</a>
-            <a  method="GET" action="/register">Register</a>
-        </nav>
-    </header>
-    <section>
-        <p>This is the homepage of our organization's digital twin system.</p>
-    </section>
+
+<div class="grid"></div>
+<div class="scan"></div>
+<div class="radar"></div>
+
+<div class="container">
+    <h1>SecureX</h1>
+    <p>Intrusion Detection & Cyber Defense System</p>
+
+    <button class="btn" onclick="location.href='/login'">LOGIN</button>
+    <button class="btn" onclick="location.href='/register'">REGISTER</button>
+</div>
+
 </body>
 </html>
